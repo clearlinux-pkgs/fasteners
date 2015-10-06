@@ -4,7 +4,7 @@
 #
 Name     : fasteners
 Version  : 0.13.0
-Release  : 6
+Release  : 7
 URL      : https://pypi.python.org/packages/source/f/fasteners/fasteners-0.13.0.tar.gz
 Source0  : https://pypi.python.org/packages/source/f/fasteners/fasteners-0.13.0.tar.gz
 Summary  : A python package that provides useful locks.
