@@ -4,7 +4,7 @@
 #
 Name     : fasteners
 Version  : 0.13.0
-Release  : 7
+Release  : 8
 URL      : https://pypi.python.org/packages/source/f/fasteners/fasteners-0.13.0.tar.gz
 Source0  : https://pypi.python.org/packages/source/f/fasteners/fasteners-0.13.0.tar.gz
 Summary  : A python package that provides useful locks.
@@ -47,7 +47,7 @@ python3 setup.py build -b py3
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-nosetests-3.4
+nosetests-3.5
 %install
 rm -rf %{buildroot}
 python2 setup.py build -b py2 install --root=%{buildroot}
