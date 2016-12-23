@@ -4,7 +4,7 @@
 #
 Name     : fasteners
 Version  : 0.14.1
-Release  : 17
+Release  : 18
 URL      : https://pypi.python.org/packages/source/f/fasteners/fasteners-0.14.1.tar.gz
 Source0  : https://pypi.python.org/packages/source/f/fasteners/fasteners-0.14.1.tar.gz
 Summary  : A python package that provides useful locks.
@@ -12,14 +12,14 @@ Group    : Development/Tools
 License  : Apache-2.0
 Requires: fasteners-python
 BuildRequires : extras
-BuildRequires : monotonic-python
+BuildRequires : monotonic
 BuildRequires : nose
 BuildRequires : pbr
 BuildRequires : pip
 BuildRequires : python-dev
 BuildRequires : python3-dev
 BuildRequires : setuptools
-BuildRequires : six-python
+BuildRequires : six
 BuildRequires : testtools
 
 %description
@@ -31,8 +31,6 @@ Fasteners
 %package python
 Summary: python components for the fasteners package.
 Group: Default
-Requires: monotonic-python
-Requires: six-python
 
 %description python
 python components for the fasteners package.
@@ -42,6 +40,7 @@ python components for the fasteners package.
 %setup -q -n fasteners-0.14.1
 
 %build
+export LANG=C
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
@@ -49,7 +48,7 @@ python3 setup.py build -b py3
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-nosetests-3.5
+nosetests-3.6
 %install
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot}
