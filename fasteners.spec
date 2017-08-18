@@ -4,13 +4,15 @@
 #
 Name     : fasteners
 Version  : 0.14.1
-Release  : 20
-URL      : https://pypi.python.org/packages/source/f/fasteners/fasteners-0.14.1.tar.gz
-Source0  : https://pypi.python.org/packages/source/f/fasteners/fasteners-0.14.1.tar.gz
+Release  : 21
+URL      : http://pypi.debian.net/fasteners/fasteners-0.14.1.tar.gz
+Source0  : http://pypi.debian.net/fasteners/fasteners-0.14.1.tar.gz
 Summary  : A python package that provides useful locks.
 Group    : Development/Tools
 License  : Apache-2.0
 Requires: fasteners-python
+Requires: monotonic
+Requires: six
 BuildRequires : extras
 BuildRequires : monotonic
 BuildRequires : nose
@@ -23,10 +25,7 @@ BuildRequires : six
 BuildRequires : testtools
 
 %description
-Fasteners
 =========
-.. image:: https://travis-ci.org/harlowja/fasteners.png?branch=master
-:target: https://travis-ci.org/harlowja/fasteners
 
 %package python
 Summary: python components for the fasteners package.
@@ -40,8 +39,11 @@ python components for the fasteners package.
 %setup -q -n fasteners-0.14.1
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1484546137
+export SOURCE_DATE_EPOCH=1503088678
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
@@ -51,14 +53,18 @@ export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 nosetests-3.6
 %install
-export SOURCE_DATE_EPOCH=1484546137
+export SOURCE_DATE_EPOCH=1503088678
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+echo ----[ mark ]----
+cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
+echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
 
 %files python
 %defattr(-,root,root,-)
-/usr/lib/python*/*
+/usr/lib/python2*/*
+/usr/lib/python3*/*
