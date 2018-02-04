@@ -4,7 +4,7 @@
 #
 Name     : fasteners
 Version  : 0.14.1
-Release  : 22
+Release  : 23
 URL      : http://pypi.debian.net/fasteners/fasteners-0.14.1.tar.gz
 Source0  : http://pypi.debian.net/fasteners/fasteners-0.14.1.tar.gz
 Summary  : A python package that provides useful locks.
@@ -22,6 +22,7 @@ BuildRequires : python3-dev
 BuildRequires : setuptools
 BuildRequires : six
 BuildRequires : testtools
+Patch1: deps.patch
 
 %description
 =========
@@ -46,13 +47,14 @@ python3 components for the fasteners package.
 
 %prep
 %setup -q -n fasteners-0.14.1
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1517761445
+export SOURCE_DATE_EPOCH=1517765408
 python3 setup.py build -b py3
 
 %install
