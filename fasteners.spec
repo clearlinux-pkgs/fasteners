@@ -4,17 +4,16 @@
 #
 Name     : fasteners
 Version  : 0.14.1
-Release  : 21
+Release  : 22
 URL      : http://pypi.debian.net/fasteners/fasteners-0.14.1.tar.gz
 Source0  : http://pypi.debian.net/fasteners/fasteners-0.14.1.tar.gz
 Summary  : A python package that provides useful locks.
 Group    : Development/Tools
 License  : Apache-2.0
+Requires: fasteners-python3
 Requires: fasteners-python
-Requires: monotonic
 Requires: six
 BuildRequires : extras
-BuildRequires : monotonic
 BuildRequires : nose
 BuildRequires : pbr
 BuildRequires : pip
@@ -30,9 +29,19 @@ BuildRequires : testtools
 %package python
 Summary: python components for the fasteners package.
 Group: Default
+Requires: fasteners-python3
 
 %description python
 python components for the fasteners package.
+
+
+%package python3
+Summary: python3 components for the fasteners package.
+Group: Default
+Requires: python3-core
+
+%description python3
+python3 components for the fasteners package.
 
 
 %prep
@@ -43,20 +52,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1503088678
-python2 setup.py build -b py2
+export SOURCE_DATE_EPOCH=1517761445
 python3 setup.py build -b py3
 
-%check
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-nosetests-3.6
 %install
-export SOURCE_DATE_EPOCH=1503088678
 rm -rf %{buildroot}
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+python3 -tt setup.py build -b py3 install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -66,5 +67,7 @@ echo ----[ mark ]----
 
 %files python
 %defattr(-,root,root,-)
-/usr/lib/python2*/*
+
+%files python3
+%defattr(-,root,root,-)
 /usr/lib/python3*/*
