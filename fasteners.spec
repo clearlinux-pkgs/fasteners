@@ -4,7 +4,7 @@
 #
 Name     : fasteners
 Version  : 0.14.1
-Release  : 25
+Release  : 26
 URL      : http://pypi.debian.net/fasteners/fasteners-0.14.1.tar.gz
 Source0  : http://pypi.debian.net/fasteners/fasteners-0.14.1.tar.gz
 Summary  : A python package that provides useful locks.
