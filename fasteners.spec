@@ -17,7 +17,7 @@ BuildRequires : extras
 BuildRequires : nose
 BuildRequires : pbr
 BuildRequires : pip
-BuildRequires : python-dev
+
 BuildRequires : python3-dev
 BuildRequires : setuptools
 BuildRequires : six
