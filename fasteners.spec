@@ -4,7 +4,7 @@
 #
 Name     : fasteners
 Version  : 0.15
-Release  : 40
+Release  : 41
 URL      : https://files.pythonhosted.org/packages/15/d7/1e8b3270f21dffcaaf5a2889675e8b2fa35f8a43a5817a31d3820e8e9495/fasteners-0.15.tar.gz
 Source0  : https://files.pythonhosted.org/packages/15/d7/1e8b3270f21dffcaaf5a2889675e8b2fa35f8a43a5817a31d3820e8e9495/fasteners-0.15.tar.gz
 Summary  : A python package that provides useful locks.
@@ -24,7 +24,65 @@ BuildRequires : testtools
 Patch1: deps.patch
 
 %description
+Fasteners
 =========
+
+.. image:: https://travis-ci.org/harlowja/fasteners.png?branch=master
+   :target: https://travis-ci.org/harlowja/fasteners
+
+.. image:: https://ci.appveyor.com/api/projects/status/7d7aku32pimpadiv
+   :target: https://ci.appveyor.com/project/JoshuaHarlow/fasteners
+
+.. image:: https://readthedocs.org/projects/fasteners/badge/?version=latest
+   :target: https://readthedocs.org/projects/fasteners/?badge=latest
+   :alt: Documentation Status
+
+.. image:: https://img.shields.io/pypi/dm/fasteners.svg
+   :target: https://pypi.python.org/pypi/fasteners/
+   :alt: Downloads
+
+.. image:: https://img.shields.io/pypi/v/fasteners.svg
+    :target: https://pypi.python.org/pypi/fasteners/
+    :alt: Latest Version
+
+Overview
+--------
+
+A python `package`_ that provides useful locks.
+
+It includes the following.
+
+Locking decorator
+*****************
+
+* Helpful ``locked`` decorator (that acquires instance
+  objects lock(s) and acquires on method entry and
+  releases on method exit).
+
+Reader-writer locks
+*******************
+
+* Multiple readers (at the same time).
+* Single writers (blocking any readers).
+* Helpful ``read_locked`` and ``write_locked`` decorators.
+
+Inter-process locks
+*******************
+
+* Single writer using file based locking (these automatically
+  release on process exit, even if ``__release__`` or
+  ``__exit__`` is never called).
+* Helpful ``interprocess_locked`` decorator.
+
+Generic helpers
+***************
+
+* A ``try_lock`` helper context manager that will attempt to
+  acquire a given lock and provide back whether the attempt
+  passed or failed (if it passes, then further code in the
+  context manager will be ran **with** the lock acquired).
+
+.. _package: https://pypi.python.org/pypi/fasteners
 
 %package license
 Summary: license components for the fasteners package.
@@ -47,6 +105,7 @@ python components for the fasteners package.
 Summary: python3 components for the fasteners package.
 Group: Default
 Requires: python3-core
+Provides: pypi(fasteners)
 
 %description python3
 python3 components for the fasteners package.
@@ -62,7 +121,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1572557041
+export SOURCE_DATE_EPOCH=1582922591
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
